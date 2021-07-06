@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_app/models/current-weather-model.dart';
 import 'package:weather_app/models/forecast-weather-model.dart';
 import 'package:weather_app/config/utils.dart';
@@ -12,9 +13,9 @@ class WeatherProvider extends ChangeNotifier {
   CurrentWeatherResponse get getCurrentData => _current;
   ForecastWeatherResponse get getforecastData => _forecast;
 
-  Future fetchCurrentData() async {
+  Future fetchCurrentData(Position position) async {
     final url =
-        'http://api.openweathermap.org/data/2.5/weather?q=dhaka&units=metric&appid=$weather_api_key';
+        'http://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&units=metric&appid=$weather_api_key';
 
     try {
       final response = await Http.get(Uri.parse(url));
@@ -27,9 +28,9 @@ class WeatherProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future fetchForecastData() async {
+  Future fetchForecastData(Position position) async {
     final url =
-        'http://api.openweathermap.org/data/2.5/forecast?q=dhaka&cnt=16&units=metric&appid=$weather_api_key';
+        'http://api.openweathermap.org/data/2.5/forecast?lat=${position.latitude}&lon=${position.longitude}&cnt=90&units=metric&appid=$weather_api_key';
 
     try {
       final response = await Http.get(Uri.parse(url));

@@ -9,22 +9,35 @@ class ForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(9.0),
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+          color: Colors.blueGrey[100].withOpacity(.5),
+          borderRadius: BorderRadius.circular(20)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             getFormattedDate(forecastElement.dt, 'EEE'),
-            style: TextStyle(fontSize: 20.0),
-          ),
-          Image.network(
-            '$WEATHER_ICON_PREFIX${forecastElement.weather[0].icon}$WEATHER_ICON_SUFFIX',
-            height: 100.0,
-            width: 100.0,
-            fit: BoxFit.cover,
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
           ),
           Text(
-              '${forecastElement.main.tempMax}/${forecastElement.main.tempMin}\u00B0')
+            getFormattedDate(forecastElement.dt, 'h a'),
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
+          ),
+          Expanded(
+            child: Image.network(
+              '$WEATHER_ICON_PREFIX${forecastElement.weather[0].icon}$WEATHER_ICON_SUFFIX',
+              height: 100.0,
+              width: 100.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            '${forecastElement.main.tempMax}\u00B0/${forecastElement.main.tempMin}\u00B0',
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
+          )
         ],
       ),
     );

@@ -5,3 +5,13 @@ String getFormattedDate(int date, String format) =>
     DateFormat(format).format(DateTime.fromMillisecondsSinceEpoch(date * 1000));
 const WEATHER_ICON_PREFIX = 'https://openweathermap.org/img/wn/';
 const WEATHER_ICON_SUFFIX = '@2x.png';
+const cities = [
+  'Brussels',
+  'Dhaka',
+  'Istanbul',
+  'Kazan',
+  'London',
+  'Manchester',
+  'Oslo',
+  'Stockholm'
+];
